@@ -1,0 +1,195 @@
+
+/* Dark mode on body adds base styles */
+body.dark-mode {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+/* Navbar styling */
+.navbar {
+  padding: 8px 18px;
+  transition: background-color 0.3s ease;
+}
+
+/* Light mode background override */
+.bg-light-mode {
+  background-color: #e3f2fd !important;
+}
+
+/* Dark mode navbar */
+.dark-mode .navbar,
+.navbar.dark-mode {
+  background-color: #1a1a1a !important;
+}
+
+.dark-mode .navbar-toggler-icon {
+  filter: invert(1);
+}
+
+/* Nav links */
+.nav-link {
+  position: relative;
+  font-weight: 600;
+  transition: color 0.3s ease-in-out;
+  display: inline-block;
+  color: #000;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0;
+  height: 3px;
+  background-color: #007BFF;
+  transition: width 0.3s ease-in-out;
+}
+.nav-link:hover {
+  color: #0056b3;
+}
+.nav-link:hover::after {
+  width: 100%;
+}
+.active-link {
+  color: #007BFF !important;
+}
+.active-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 100%;
+  height: 3px;
+  background-color: #007BFF;
+}
+
+
+.dark-mode .navbar {
+  background-color: #1e1e1e !important;
+}
+
+.dark-mode .navbar-brand,
+.dark-mode .nav-link,
+.dark-mode .form-check-label {
+  color: #90caf9 !important;
+}
+
+/* Buttons */
+.dark-mode .btn-primary {
+  background-color: #90caf9 !important;
+  border-color: #90caf9 !important;
+  color: #000 !important;
+}
+
+.dark-mode .btn-outline-primary {
+  color: #90caf9 !important;
+  border-color: #90caf9 !important;
+}
+
+.dark-mode .btn-outline-primary:hover {
+  background-color: #90caf9 !important;
+  color: #000 !important;
+}
+
+/* Nav link active underline */
+.dark-mode .nav-link::after {
+  background-color: #90caf9;
+}
+
+.dark-mode .nav-link:hover {
+  color: #90caf9 !important;
+}
+
+.dark-mode .active-link {
+  color: #90caf9 !important;
+}
+
+/* Adjust toggle alignment */
+.form-check.form-switch {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.form-check-label {
+  margin-bottom: 0;
+  font-weight: 500;
+}
+
+/* Adjust spacing for dark mode toggle */
+.navbar .form-check {
+  margin-left: 1rem;
+}
+
+@media (max-width: 991px) {
+  .nav-link {
+    width: auto !important;
+    text-align: right;
+  }
+}
+
+/* Button animations */
+.btn-custom {
+  transition: all 0.3s ease-in-out;
+}
+.btn-custom:hover {
+  transform: scale(1.05);
+}
+
+img {
+  width: 25px;
+  height: 25px;
+}
+
+.nav-link.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* styles.css */
+.dark-mode {
+  background-color: #121212;
+  color: white;
+}
+
+.dark-mode .btn-primary {
+  background-color: #90caf9;
+  color: black;
+}
+.dark-mode {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+.card-dark-mode {
+  background-color: #1e1e1e;
+  color: #ffffff;
+}
+.navbar-light-mode {
+  background-color: #e3f2fd !important;
+  color: black;
+}
+
+.navbar-dark-mode {
+  background-color: #2e2e2e !important;
+  color: white;
+}
+.dark-mode .form-check-input {
+  background-color: white !important; /* White toggle */
+  border-color: white !important; /* White border */
+}
+
+.dark-mode .form-check-input:checked {
+  background-color: #90caf9 !important; /* Keep the blue when checked */
+  border-color: #90caf9 !important;
+}
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10000000000; /* فوق المحتوى */
+}
+.main-content {
+  padding-top: 70px
+}

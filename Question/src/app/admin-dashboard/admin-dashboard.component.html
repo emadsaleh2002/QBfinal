@@ -1,0 +1,38 @@
+<div class="admin-home" [ngClass]="{'card-dark-mode': isDarkMode}">
+  <div class="admin-header">
+    <h2 [ngClass]="{'card-dark-mode': isDarkMode}">Manage the platform content easily and efficiently.</h2>
+  </div>
+
+  <div class="admin-actions">
+
+    <div class="admin-card" [ngClass]="{'card-dark-mode': isDarkMode}">
+      <i class="fas fa-book"></i>
+      <h3 [ngClass]="{'card-dark-mode': isDarkMode}">Courses</h3>
+      <p [ngClass]="{'card-dark-mode': isDarkMode}">Add or delete courses</p>
+      <button (click)="goToSubjects()">Manage Courses</button>
+    </div>
+
+    <div class="admin-card" [ngClass]="{'card-dark-mode': isDarkMode}">
+      <i class="fas fa-layer-group"></i>
+      <h3 [ngClass]="{'card-dark-mode': isDarkMode}">Topics</h3>
+      <p [ngClass]="{'card-dark-mode': isDarkMode}">Organize topics under each course</p>
+      <button (click)="goToTopics()">Manage Topics</button>
+    </div>
+
+    <div class="admin-card" [ngClass]="{'card-dark-mode': isDarkMode}">
+      <i class="fas fa-question-circle"></i>
+      <h3 [ngClass]="{'card-dark-mode': isDarkMode}">Questions</h3>
+      <p [ngClass]="{'card-dark-mode': isDarkMode}">Create and manage question bank</p>
+      <button (click)="goToQuestions()">Manage Questions</button>
+    </div>
+
+    </div>
+</div>
+    <!--
+    <div class="admin-card">
+      <i class="fas fa-file-alt"></i>
+      <h3>Answers</h3>
+      <p>Review open question answers</p>
+      <button (click)="viewAnswers()">View Answers</button>
+    </div>
+    -->

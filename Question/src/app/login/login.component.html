@@ -1,0 +1,61 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+<div class="full-page" [ngClass]="{'dark-mode': isDarkMode}">
+  <h1 class="hero-title" [ngClass]="{'dark-mode': isDarkMode}">Smart QuizBank</h1>
+
+  <div class="card p-5 shadow-lg" [ngClass]="{'dark-mode': isDarkMode}">
+    <h3 class="text-center text-primary" [ngClass]="{'dark-mode': isDarkMode}">Login</h3>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+      <div class="mb-3">
+        <label for="email" class="form-label" [ngClass]="{'dark-mode': isDarkMode}">Email</label>
+        <input type="email" id="email" formControlName="email" class="form-control" placeholder="Enter email"
+          [ngClass]="{'dark-input': isDarkMode}">
+        <div *ngIf="f['email'].invalid && (f['email'].touched || f['email'].dirty || submitted)" class="text-danger"
+          [ngClass]="{'dark-mode': isDarkMode}">
+          <div *ngIf="f['email'].errors?.['required']">Email is required</div>
+          <div *ngIf="f['email'].errors?.['email']">Invalid email format</div>
+          <div *ngIf="f['email'].errors?.['notFound']">Email not found</div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label" [ngClass]="{'dark-mode': isDarkMode}">Password</label>
+        <div class="input-group">
+          <input [type]="showPassword ? 'text' : 'password'" id="password" formControlName="password"
+            class="form-control" placeholder="Enter password" [ngClass]="{'dark-input': isDarkMode}" />
+          <span class="input-group-text" style="cursor: pointer;" (click)="toggleShowPassword()"
+            [ngClass]="{'dark-mode': isDarkMode}">
+            <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+          </span>
+        </div>
+        <div *ngIf="f['password'].invalid && (f['password'].touched || f['password'].dirty || submitted)"
+          class="text-danger" [ngClass]="{'dark-mode': isDarkMode}">
+          <div *ngIf="f['password'].errors?.['required']">Password is required</div>
+          <div *ngIf="f['password'].errors?.['incorrectPassword']">Incorrect password</div>
+        </div>
+      </div>
+
+      <div class="text-danger text-center mb-3" *ngIf="errorMessage" [ngClass]="{'dark-mode': isDarkMode}">
+        {{ errorMessage }}
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100" [disabled]="sendData"
+        [ngClass]="{'dark-mode': isDarkMode}">Login</button>
+
+      <p class="text-center mt-3" [ngClass]="{'dark-mode': isDarkMode}">
+        Don't have an account? <a routerLink="/signup" class="text-primary link-primary"
+          [ngClass]="{'dark-mode': isDarkMode}">Sign-up</a>
+      </p>
+      <div class="text-center mt-2" [ngClass]="{'dark-mode': isDarkMode}">
+        <a routerLink="/forgot-password" class="text-primary link-primary" [ngClass]="{'dark-mode': isDarkMode}">Forgot
+          Password?</a>
+      </div>
+    </form>
+
+    <div class="user-icon text-center mt-3">
+      <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" width="50" />
+    </div>
+  </div>
+</div>

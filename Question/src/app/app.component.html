@@ -1,0 +1,81 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg" [ngClass]="{ 'navbar-light-mode': !isDarkMode, 'navbar-dark-mode': isDarkMode }">
+  <div class="container-fluid">
+    <div class="d-flex align-items-center">
+      <img src="../assets/images/QB2.png" class="me-2" height="40" alt="Logo" />
+      <a class="navbar-brand fw-bold" routerLink="/home" style="cursor: pointer;"
+        [ngClass]="{ 'text-light': isDarkMode, 'text-primary': !isDarkMode }">QuizBank</a>
+    </div>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+      <!-- Nav Links -->
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/home" routerLinkActive="active-link" [ngClass]="{ 'text-white': isDarkMode }"
+            [routerLinkActiveOptions]="{ exact: true }">Home</a>
+        </li>
+
+        <li class="nav-item" *ngIf="authService.userRole === 'admin'">
+          <a class="nav-link" routerLink="/admin/dashboard" routerLinkActive="active-link"
+            [ngClass]="{ 'text-white': isDarkMode }">
+            Admin Management
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="authService.userRole !== 'admin'">
+          <a class="nav-link" [class.disabled]="!isLoggedIn()" [routerLink]="isLoggedIn() ? '/questions' : null"
+            [ngClass]="{ 'active-link': isQuestion(), 'text-white': isDarkMode }">
+            Questions
+          </a>
+        </li>
+
+        <li class="nav-item" *ngIf="authService.userRole === 'admin'">
+          <a class="nav-link" routerLink="/questions" routerLinkActive="active-link"
+            [ngClass]="{ 'text-white': isDarkMode }">
+            View Questions
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/about" routerLinkActive="active-link"
+            [ngClass]="{ 'text-white': isDarkMode }">About</a>
+        </li>
+      </ul>
+
+      <!-- Right Section -->
+      <div class="d-flex align-items-center">
+
+        <!-- <a routerLink="/login" class="btn btn-outline-primary me-2 px-4" *ngIf="!isLoggedIn()">Login</a> -->
+        <a routerLink="/login" class="btn me-2 px-4" [ngClass]="isDarkMode ? 'btn-primary' : 'btn-outline-primary'"
+          *ngIf="!isLoggedIn()">
+          Login
+        </a>
+
+        <a (click)="logout()" class="btn btn-danger me-2 px-4" *ngIf="isLoggedIn()">Logout</a>
+        <a routerLink="/signup" class="btn btn-primary px-4" *ngIf="!isLoggedIn()">Sign Up</a>
+
+        <!-- Dark Mode Toggle -->
+        <div class="form-check form-switch ms-3">
+          <input class="form-check-input" type="checkbox" id="darkModeSwitch" [checked]="themeService.isDarkMode()"
+            (change)="toggleDarkMode()" />
+          <label class="form-check-label" for="darkModeSwitch" [ngClass]="{ 'text-light': isDarkMode }">
+            {{ isDarkMode ? 'Dark Mode' : 'Light Mode' }}
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Main Content -->
+<div class="main-content">
+  <router-outlet></router-outlet>
+</div>
+
+<!-- Footer -->
+<app-footer></app-footer>

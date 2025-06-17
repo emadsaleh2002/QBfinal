@@ -1,0 +1,47 @@
+ul li {
+  font-size: 1rem;
+}
+
+p {
+  font-size: 1rem;
+  color: #555; /* Default light mode paragraph color */
+}
+
+.dark-mode p {
+  color: #eee; /* Dark mode paragraph color */
+}
+
+h4 {
+  margin-top: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-shadow: 10px 5px 5px rgba(20, 17, 219, 0.2);
+  color: #2b2d42; /* Default light mode heading color */
+}
+
+.dark-mode h4 {
+  color: #90caf9; /* Dark mode heading color */
+}
+
+h6 {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #333; /* Default light mode subheading color */
+}
+
+.dark-mode h6 {
+  color: #bdbdbd; /* Dark mode subheading color */
+}
+
+.about-contact a {
+  color: #007bff; /* Default link color */
+  text-decoration: none;
+}
+
+.about-contact a:hover {
+  text-decoration: underline;
+}
+
+.dark-mode .about-contact a {
+  color: #9dc7ea; /* Dark mode link color */
+}

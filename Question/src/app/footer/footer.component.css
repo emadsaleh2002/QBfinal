@@ -1,0 +1,36 @@
+.footer {
+  background: #2c3e50;
+  color: white;
+  text-align: center;
+  padding: 5px 0; /* Very small padding */
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  font-size: 12px; /* Small font */
+  max-height: 25px; /* Slim footer */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.social-icons {
+  display: flex;
+  gap: 10px;
+}
+
+.social-icons a {
+  color: white;
+  font-size: 14px;
+  transition: 0.3s;
+  margin-top: 10px;
+}
+
+.social-icons a:hover {
+  color: #b3d2ea;
+}
+
+p{
+  margin-top: 10px;
+}

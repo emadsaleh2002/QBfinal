@@ -1,0 +1,87 @@
+.container {
+  max-width: 600px;
+  margin: auto;
+}
+
+h2 {
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+input {
+  font-size: 1.1rem;
+}
+
+.text-danger {
+  font-weight: bold;
+  font-size: 0.95rem;
+}
+
+.subject-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.subject-list-title {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.input-group-search {
+  width: 200px;
+}
+
+.subject-list-container {
+  max-height: 350px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+}
+
+
+/* Add spacing between list items */
+.list-group-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Dark Mode Styles */
+.card-dark-mode {
+  /* background-color: #2e2e2e !important; */
+  color: white !important;
+}
+
+.card-dark-mode h2,
+.card-dark-mode .subject-list-title,
+.card-dark-mode .text-danger{
+  color: white !important;
+}
+
+.card-dark-mode .form-control {
+  background-color: #333 !important;
+  color: white !important;
+  border-color: #555 !important;
+}
+
+.card-dark-mode .form-control::placeholder{
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.dark-input {
+  background-color: #333 !important;
+  color: white !important;
+  border-color: #555 !important;
+}
+
+.dark-input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.card-dark-mode .list-group-item{
+  background-color: #333 !important;
+  color: white !important;
+  border-color: #555 !important;
+}

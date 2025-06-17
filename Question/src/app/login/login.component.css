@@ -1,0 +1,92 @@
+/* Center Content Vertically */
+.full-page {
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  align-items: center;
+  justify-content: center;
+}
+
+/* Adjust Title Position */
+.hero-title {
+  /* padding-top: 25px; */
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-shadow: 5px 5px 10px rgba(20, 17, 219, 0.2);
+  margin-bottom: 65px;
+  text-align: center;
+}
+
+/* Style the card */
+.card {
+  border-radius: 10px;
+  border: none;
+  width: 40%;
+  /* padding: 20px; */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Dark Mode Styles */
+.dark-mode {
+  /* background-color: #2e2e2e !important; */
+  color: white !important;
+}
+
+.dark-mode h1,
+.dark-mode h3,
+.dark-mode label,
+.dark-mode p {
+  color: white !important;
+}
+
+.dark-mode .card {
+  background-color: #333 !important;
+  color: white !important;
+  border-color: #555 !important;
+}
+
+.dark-mode .form-control {
+  background-color: #444 !important;
+  color: white !important;
+  border-color: #666 !important;
+}
+
+.dark-mode .form-control::placeholder {
+  color: #aaa;
+}
+
+.dark-mode .btn-primary {
+  background-color: #007bff !important;
+  border-color: #007bff !important;
+  color: white !important;
+}
+
+.dark-mode .btn-primary:hover {
+  background-color: #0056b3 !important;
+  border-color: #0056b3 !important;
+}
+
+.dark-mode .input-group-text {
+  background-color: #444 !important;
+  color: white !important;
+  border-color: #666 !important;
+}
+
+.dark-input {
+  background-color: #444 !important;
+  color: white !important;
+  border-color: #666 !important;
+}
+
+.dark-input::placeholder {
+  color: #aaa;
+}
+
+
+.dark-mode .link-primary{
+  color: #007bff !important;
+}
+
+.dark-mode .link-primary:hover{
+  color: #0056b3 !important;
+}
+

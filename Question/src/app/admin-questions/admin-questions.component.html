@@ -1,0 +1,137 @@
+<div class="d-flex justify-content-start m-2">
+  <button class="btn mb-3" [ngClass]="isDarkMode ? 'btn-primary' : 'btn-outline-primary'" (click)="goBack()">
+    <i class="bi bi-arrow-left"></i> Back
+  </button>
+</div>
+
+<div class="container mb-5" style="margin-top:-65PX;" [ngClass]="{'card-dark-mode': isDarkMode}">
+  <h2 class="mb-3" [ngClass]="{'card-dark-mode': isDarkMode}">Add New Question</h2>
+
+  <!-- select course partation -->
+  <div class="mb-1 position-relative">
+    <label for="subject" class="form-label" [ngClass]="{'card-dark-mode': isDarkMode}">Select Course</label>
+    <ng-select [items]="subjects" bindLabel="name" [(ngModel)]="selectedSubject"
+      (change)="onSubjectChange(selectedSubject)" [searchable]="true" [clearable]="false" [closeOnSelect]="true"
+      class="custom-ng-select" [placeholder]="selectedSubject ? '' : 'Search or Select a Course'"
+      [searchFn]="customSearchSubject" [ngClass]="{'dark-input': isDarkMode}">
+    </ng-select>
+  </div>
+
+  <!-- select Topic partation -->
+  <div class="mb-1 position-relative" *ngIf="selectedSubject">
+    <label for="topic" class="form-label" [ngClass]="{'card-dark-mode': isDarkMode}">Select Topic</label>
+    <ng-select [items]="topics" bindLabel="name" [(ngModel)]="selectedTopic" [searchable]="true" [clearable]="false"
+      [closeOnSelect]="true" (change)="clearMessage()" class="custom-ng-select"
+      [placeholder]="selectedTopic ? '' : 'Search or Select a Topic'" [searchFn]="customSearchTopic"
+      [ngClass]="{'dark-input': isDarkMode}">
+    </ng-select>
+  </div>
+
+  <!-- select Question Type partation -->
+  <div class="mb-2" style="border: 1px solid rgba(128, 128, 128, 0.586); padding: 2px; border-radius: 5px;"
+    [ngClass]="{'card-dark-mode': isDarkMode}">
+    <label class="form-label d-block" [ngClass]="{'card-dark-mode': isDarkMode}">Select Question Type</label>
+    <div *ngFor="let type of questionTypes" class="form-check form-check-inline me-5">
+      <input class="form-check-input" type="radio" name="questionType" [id]="'type_' + type" [value]="type"
+        [(ngModel)]="questionType" (change)="onQuestionTypeChange()" />
+      <label class="form-check-label" [for]="'type_' + type" [ngClass]="{'card-dark-mode': isDarkMode}">
+        {{ type }}
+      </label>
+    </div>
+  </div>
+
+  <!-- select Difficulty Level partation -->
+  <div class="mb-1" style="border: 1px solid rgba(128, 128, 128, 0.586); padding: 2px; border-radius: 5px;"
+    [ngClass]="{'card-dark-mode': isDarkMode}">
+    <label class="form-label d-block" [ngClass]="{'card-dark-mode': isDarkMode}">Select Difficulty Level</label>
+    <div *ngFor="let level of difficultyLevels" class="form-check form-check-inline me-5">
+      <input class="form-check-input" type="radio" name="difficultyLevel" [id]="'difficulty_' + level" [value]="level"
+        [(ngModel)]="difficulty" (change)="onDifficultyChange();clearMessage()" />
+      <label class="form-check-label" [for]="'difficulty_' + level" [ngClass]="{'card-dark-mode': isDarkMode}">
+        {{ level }}
+      </label>
+    </div>
+  </div>
+
+  <!-- Upload Image partation -->
+  <div class="mb-1 form-label" [ngClass]="{'card-dark-mode': isDarkMode}">
+    <label>Upload Question Image</label>
+    <input type="file" class="form-control" id="fileInput" (change)="onFileSelected($event)"
+      [ngClass]="{'dark-input': isDarkMode}" />
+  </div>
+  <!-- Toggle Preview + Remove Image Buttons -->
+  <div *ngIf="imagePreviewUrl" class="d-flex justify-content-between mb-2">
+    <button class="btn btn-sm btn-primary" (click)="showPreview = !showPreview">
+      {{ showPreview ? 'Hide' : 'Show' }} Preview
+    </button>
+
+    <button class="btn btn-sm btn-danger" (click)="removeImage()">
+      🗑️ Remove Image
+    </button>
+  </div>
+
+  <div *ngIf="imagePreviewUrl && showPreview" class="mt-2 text-center">
+    <label class="form-label d-block" [ngClass]="{'card-dark-mode': isDarkMode}">Image Preview</label>
+    <img [src]="imagePreviewUrl" alt="Preview" class="img-fluid"
+      style="max-height: 250px; border: 1px solid #ccc; border-radius: 6px;" />
+  </div>
+
+  <!-- Enter Question Text partation -->
+  <div class="mb-1 form-label" *ngIf="questionType !== 'mcq'" [ngClass]="{'card-dark-mode': isDarkMode}">
+    <label>Enter Question Text</label>
+    <textarea class="form-control" [(ngModel)]="openQuestionText" placeholder="Type your question here"
+      [ngClass]="{'dark-input': isDarkMode}" (change)="clearMessage()"></textarea>
+  </div>
+
+  <!-- Select MCQ Correct Answer partation -->
+  <div class="mb-1 form-label" [ngClass]="{'card-dark-mode': isDarkMode}" *ngIf="questionType === 'mcq'">
+    <label>Correct Answer</label>
+    <select class="form-select" [(ngModel)]="correctAnswer" [ngClass]="{'dark-input': isDarkMode}">
+      <option [ngValue]="'A'">A</option>
+      <option [ngValue]="'B'">B</option>
+      <option [ngValue]="'C'">C</option>
+      <option [ngValue]="'D'">D</option>
+    </select>
+  </div>
+
+
+  <!-- Select True False Correct Answer partation -->
+  <div class="mb-1 form-label" [ngClass]="{'card-dark-mode': isDarkMode}" *ngIf="questionType === 'true/false'">
+    <label>Correct Answer</label>
+    <select class="form-select" [(ngModel)]="correctAnswer" [ngClass]="{'dark-input': isDarkMode}">
+      <option [ngValue]="'True'">True</option>
+      <option [ngValue]="'False'">False</option>
+    </select>
+  </div>
+
+  <!-- Enter Correct Answer in complete and open partation -->
+  <div class="mb-1 form-label" [ngClass]="{'card-dark-mode': isDarkMode}"
+    *ngIf="questionType === 'complete' || questionType === 'open'">
+    <label>Correct Answer</label>
+    <input type="text" class="form-control" [(ngModel)]="correctAnswer" placeholder="Enter correct answer"
+      [ngClass]="{'dark-input': isDarkMode}" />
+  </div>
+
+
+  <button class="btn btn-primary m-1" [disabled]="isSubmitting" (click)="addQuestion()">Add Question</button>
+  <button class="btn btn-danger" (click)="goToDeletePage()">Delete Questions</button>
+
+  <div *ngIf="message" class="mt-2 alert alert-info" [ngClass]="{'card-dark-mode': isDarkMode}">
+    {{ message }}
+  </div>
+</div>
+
+<!-- Score Input -->
+<!-- <div class="mb-1 form-label">
+  <label for="score">Score</label>
+  <input
+    type="number"
+    class="form-control"
+    [(ngModel)]="score"
+    id="score"
+    placeholder="Enter question score"
+    min="1"
+    max="100"
+    required
+  />
+</div> -->

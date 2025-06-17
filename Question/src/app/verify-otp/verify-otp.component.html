@@ -1,0 +1,21 @@
+<div class="container card mt-5 p-4 shadow" [ngClass]="{'dark-mode': isDarkMode}">
+  <h2 class="text-center" [ngClass]="{'dark-mode': isDarkMode}">Verify Code</h2>
+
+  <div class="d-flex justify-content-center gap-2">
+    <input *ngFor="let digit of otpValues; let i = index" type="text" maxlength="1"
+      class="form-control text-center otp-input" [ngClass]="{'dark-input': isDarkMode}" [id]="'otp' + i"
+      [value]="otpValues[i]" autocomplete="one-time-code" name="otp{{i}}" (input)="onOtpInput($event, i)"
+      (keydown)="onOtpKeyDown($event, i)" [autofocus]="i === 0">
+  </div>
+
+  <div *ngIf="otpInvalid" class="text-danger text-center mt-2" [ngClass]="{'dark-mode': isDarkMode}">{{ toastMessage }}
+  </div>
+
+  <div class="text-center mt-2" [ngClass]="{'dark-mode': isDarkMode}">
+    <span>⏳ Time left: {{ minutes }}:{{ seconds < 10 ? '0' + seconds : seconds }}</span>
+  </div>
+
+  <button class="btn btn-primary w-100 mt-3" (click)="verifyOTP()" [ngClass]="{'dark-mode': isDarkMode}"
+    [disabled]="expiredTime">Continue</button>
+
+</div>

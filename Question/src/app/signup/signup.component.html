@@ -1,0 +1,75 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+<div class="full-page" [ngClass]="{'dark-mode': isDarkMode}">
+  <div class="card p-4 shadow-lg" [ngClass]="{'dark-mode': isDarkMode}">
+    <div class="user-icon">
+      <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" width="50" />
+    </div>
+    <h3 class="text-center text-primary" [ngClass]="{'dark-mode': isDarkMode}">Sign-up</h3>
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+      <div class="mb-2">
+        <label for="email" class="form-label" [ngClass]="{'dark-mode': isDarkMode}">Email</label>
+        <input type="email" id="email" formControlName="email" class="form-control" placeholder="Enter your email"
+          [ngClass]="{'dark-input': isDarkMode}">
+        <div
+          *ngIf="(f['email'].invalid && (f['email'].touched || f['email'].dirty)) || (submitted && f['email'].invalid)"
+          class="text-danger" [ngClass]="{'dark-mode': isDarkMode}">
+          <div *ngIf="f['email'].errors?.['required']">Email is required</div>
+          <div *ngIf="f['email'].errors?.['email'] || f['email'].errors?.['pattern']">Invalid email</div>
+        </div>
+      </div>
+
+      <div class="mb-2">
+        <label for="password" class="form-label" [ngClass]="{'dark-mode': isDarkMode}">Password</label>
+        <div class="input-group">
+          <input [type]="showPassword ? 'text' : 'password'" id="password" formControlName="password"
+            class="form-control" placeholder="Enter your password" (input)="onPasswordInput()"
+            [ngClass]="{'dark-input': isDarkMode}" />
+          <span class="input-group-text" style="cursor: pointer;" (click)="toggleShowPassword()"
+            [ngClass]="{'dark-mode': isDarkMode}">
+            <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+          </span>
+        </div>
+
+        <div
+          *ngIf="(f['password'].invalid && (f['password'].touched || f['password'].dirty)) || (submitted && f['password'].invalid)"
+          class="text-danger" [ngClass]="{'dark-mode': isDarkMode}">
+          <div *ngIf="f['password'].errors?.['required']">Password is required</div>
+          <div *ngIf="!passwordConditions.minLength">• At least 6 characters</div>
+          <div *ngIf="!passwordConditions.hasLowerCase">• At least one lowercase letter</div>
+          <div *ngIf="!passwordConditions.hasUpperCase">• At least one uppercase letter</div>
+          <div *ngIf="!passwordConditions.hasNumber">• At least one number</div>
+          <div *ngIf="!passwordConditions.hasSpecialChar">• At least one special character</div>
+        </div>
+      </div>
+
+      <div class="mb-2">
+        <label for="confirm-password" class="form-label" [ngClass]="{'dark-mode': isDarkMode}">Confirm Password</label>
+        <div class="input-group">
+          <input [type]="showConfirmPassword ? 'text' : 'password'" id="confirm-password"
+            formControlName="confirmPassword" class="form-control" placeholder="Confirm your password"
+            [ngClass]="{'dark-input': isDarkMode}" />
+          <span class="input-group-text" style="cursor: pointer;" (click)="toggleShowConfirmPassword()"
+            [ngClass]="{'dark-mode': isDarkMode}">
+            <i class="bi" [ngClass]="showConfirmPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+          </span>
+        </div>
+
+        <div
+          *ngIf="(f['confirmPassword'].invalid && (f['confirmPassword'].touched || f['confirmPassword'].dirty)) || (submitted && f['confirmPassword'].invalid)"
+          class="text-danger" [ngClass]="{'dark-mode': isDarkMode}">
+          <div *ngIf="f['confirmPassword'].errors?.['required']">Confirm password is required</div>
+          <div *ngIf="f['confirmPassword'].errors?.['mustMatch']">Password must match</div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100" [disabled]="sendData"
+        [ngClass]="{'dark-mode': isDarkMode}">Sign-up</button>
+
+      <p class="text-center mt-3" [ngClass]="{'dark-mode': isDarkMode}">
+        Already have an account? <a routerLink="/login" class="link-primary"
+          [ngClass]="{'dark-mode': isDarkMode}">Login</a>
+      </p>
+    </form>
+  </div>
+</div>

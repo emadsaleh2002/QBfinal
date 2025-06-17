@@ -1,0 +1,122 @@
+<div class="container">
+  <div class="d-flex justify-content-start">
+    <button class="btn mb-3" [ngClass]="isDarkMode ? 'btn-primary' : 'btn-outline-primary'" (click)="goBack()">
+      <i class="bi bi-arrow-left"></i> Back
+    </button>
+  </div>
+  <h3>Questions</h3>
+  <div class="m-3 border border-primary p-3" [ngClass]="{'card-dark-mode': isDarkMode}">
+
+    <!-- when clicked on Show result -->
+    <div *ngIf="showResults" class="d-flex justify-content-between align-items-center" id="result">
+      <h4 class="mb-0">Result: {{ totalCorrect }} / {{ questions.length }} correct answers ✅</h4>
+      <div class="d-flex align-items-center gap-0">
+        <div class="circular-chart-container">
+          <svg width="100" height="100" viewBox="0 0 80 80">
+            <circle cx="18" cy="48" r="15.9155" fill="none"
+              [ngClass]="{'stroke-white': isDarkMode, 'stroke-gray': !isDarkMode}" stroke-width="2" />
+
+
+            <circle cx="18" cy="48" r="15.9155" fill="none"
+              [attr.stroke-dasharray]="correctPercent + ' ' + (100 - correctPercent)" stroke="#28a745" stroke-width="2"
+              stroke-dashoffset="25" stroke-linecap="round" />
+            <circle cx="18" cy="48" r="15.9155" fill="none"
+              [attr.stroke-dasharray]="wrongPercent + ' ' + (100 - wrongPercent)" stroke="#dc3545" stroke-width="2"
+              [attr.stroke-dashoffset]="25 - correctPercent" stroke-linecap="round" />
+            <circle cx="18" cy="48" r="15.9155" fill="none"
+              [attr.stroke-dasharray]="unansweredPercent + ' ' + (100 - unansweredPercent)" stroke="#6c757d"
+              stroke-width="2" [attr.stroke-dashoffset]="25 - correctPercent - wrongPercent" stroke-linecap="round"
+              class="unanswered-circle" />
+          </svg>
+        </div>
+        <div class="text-end d-flex justify-content-between">
+          <p class="mb-1 text-success">Correct: {{ correctPercent.toFixed(1) }}%</p>
+          <p class="mb-1 text-danger">Wrong: {{ wrongPercent.toFixed(1) }}%</p>
+          <p class="mb-1 text-secondary">Unanswered: {{ unansweredPercent.toFixed(1) }}%</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="question-content mb-3">
+      <ng-container *ngIf="questions[currentIndex].image; else showText">
+        <img class="card-img-top" width="200px" [src]="questions[currentIndex].image" alt="Question Image" />
+      </ng-container>
+      <ng-template #showText>
+        <h5>{{ questions[currentIndex].questionText }}</h5>
+      </ng-template>
+    </div>
+
+    <div *ngIf="questions[currentIndex].type === 'mcq'" class="choices-box">
+      <div *ngFor="let option of ['A', 'B', 'C', 'D']; let i = index" class="form-check">
+        <label class="form-check-label">
+          <input type="radio" [(ngModel)]="selectedAnswers[currentIndex]" [value]="option" name="q{{currentIndex}}"
+            class="form-check-input" [disabled]="showResults" />
+          {{ option.toUpperCase() }}
+        </label>
+      </div>
+    </div>
+
+    <div *ngIf="questions[currentIndex].type === 'true_false'" class="choices-box true-false-container">
+      <div class="form-check">
+        <input class="form-check-input" type="radio" [(ngModel)]="selectedAnswers[currentIndex]"
+          id="trueOption{{currentIndex}}" value="True" name="q{{currentIndex}}" [disabled]="showResults">
+        <label class="form-check-label" for="trueOption{{currentIndex}}">True</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" [(ngModel)]="selectedAnswers[currentIndex]"
+          id="falseOption{{currentIndex}}" value="False" name="q{{currentIndex}}" [disabled]="showResults">
+        <label class="form-check-label" for="falseOption{{currentIndex}}">False</label>
+      </div>
+    </div>
+
+    <div *ngIf="questions[currentIndex].type === 'complete'" class="d-flex flex-column border border-info p-2 m-2">
+      <input type="text" [(ngModel)]="selectedAnswers[currentIndex]" class="form-control"
+        placeholder="Enter your answer" [disabled]="showResults">
+    </div>
+
+    <div *ngIf="questions[currentIndex].type === 'open_text'"
+      class="d-flex flex-column border border-secondary p-2 m-2">
+      <textarea [(ngModel)]="selectedAnswers[currentIndex]" class="form-control" rows="5"
+        placeholder="Write your answer here..." [disabled]="showResults"></textarea>
+    </div>
+
+    <div *ngIf="showAnswers && showResults ">
+      <p><strong>Your Answer:</strong> {{ selectedAnswers[currentIndex] ? selectedAnswers[currentIndex] :
+        'Not Answered' }}</p>
+      <p><strong>Correct Answer:</strong>
+        {{
+        questions[currentIndex].type === 'open_text'
+        ? questions[currentIndex].modelAnswer
+        : questions[currentIndex].correctAnswer
+        }}
+      </p>
+      <p *ngIf="questions[currentIndex].type === 'open_text'"><strong>The Answer Is: </strong>
+        {{feedBackOpenQuestion[currentIndex].isCorrect}}
+      </p>
+      <p *ngIf="questions[currentIndex].type === 'open_text'"><strong>The Feedback Is: </strong>
+        {{feedBackOpenQuestion[currentIndex].feedback}}
+      </p>
+    </div>
+
+    <div *ngIf="showResults">
+      <button *ngIf="showAnswerButton" type="button" class="btn btn-success m-2" (click)="ShowAnswers()">Show
+        Answers</button>
+    </div>
+
+    <div class="d-flex flex-column">
+      <div class="m-3 d-flex justify-content-between">
+        <button class="btn btn-primary" (click)="first()">First</button>
+        <button class="btn btn-primary" (click)="previous()" [disabled]="isPreviousDisabled">Previous</button>
+        <button class="btn btn-primary" (click)="next()" [disabled]="isNextDisabled">Next</button>
+        <button class="btn btn-primary" (click)="last()">Last</button>
+      </div>
+      <div class="w-100 d-flex justify-content-center">
+        <button *ngIf="showSubmitButton" class="btn" [ngClass]="isDarkMode ? 'btn-primary' : 'btn-outline-primary'"
+          (click)="submitAnswers()">
+          Submit
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,106 @@
+.container {
+  width: 50%;
+
+}
+
+h2 {
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+::ng-deep .custom-ng-select .ng-select-container {
+  border: 1px solid #ced4da;
+  border-radius: 0.375rem;
+  padding: 0.45rem 0.75rem;
+  background-color: #fff;
+  box-shadow: none;
+  min-height: 38px;
+  font-size: 1rem;
+}
+
+::ng-deep .custom-ng-select .ng-select-container.ng-select-focused {
+  border-color: #86b7fe;
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+::ng-deep .custom-ng-select .ng-dropdown-panel {
+  z-index: 1050 !important;
+  background-color: #ffffff;
+  border: 1px solid #ced4da;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+}
+
+::ng-deep .custom-ng-select .ng-value {
+  font-weight: 500;
+  font-size: 1rem;
+  color: #212529;
+}
+.form-label{
+  font-weight: bold;
+}
+
+/* Dark Mode Styles */
+.card-dark-mode {
+  background-color: #2e2e2e !important;
+  color: white !important;
+  border-radius: 3px;
+}
+
+.card-dark-mode h2,
+.card-dark-mode .form-label,
+.card-dark-mode .form-check-label{
+  color: whitesmoke !important;
+}
+
+.card-dark-mode .form-control {
+  background-color: #333 !important;
+  color: white !important;
+  border-color: #555 !important;
+}
+
+.card-dark-mode .form-control::placeholder{
+  color: rgba(255, 255, 255, 0.7);
+}
+
+::ng-deep .card-dark-mode .custom-ng-select .ng-select-container{
+  background-color: #333 !important;
+  color: white !important;
+  border-color: #555 !important;
+}
+::ng-deep .card-dark-mode .custom-ng-select .ng-dropdown-panel{
+  background-color: #333 !important;
+  color: white !important;
+  border-color: #555 !important;
+}
+::ng-deep .card-dark-mode .custom-ng-select .ng-value{
+  color: white !important;
+}
+
+.dark-input {
+  background-color: #333 !important;
+  color: white !important;
+  border-color: #555 !important;
+}
+
+.dark-input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+.card-dark-mode .list-group-item{
+  background-color: #333 !important;
+  color: white !important;
+  border-color: #555 !important;
+}
+/* Ensure typed text in ng-select input is white in dark mode */
+::ng-deep .card-dark-mode .custom-ng-select .ng-input input {
+  color: white !important;
+}
+/* Add spacing between words in dropdown options */
+::ng-deep .custom-ng-select .ng-option {
+  padding-left: 12px;
+  word-spacing: 3px;
+}
+
+/* Add spacing between the input and the text you write */
+::ng-deep .custom-ng-select .ng-select-container .ng-input input {
+  padding-left: 10px !important; /* Add left padding */
+  letter-spacing: 1px;   /* Add space between letters. Adjust as needed */
+}

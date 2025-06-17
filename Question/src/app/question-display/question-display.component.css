@@ -1,0 +1,171 @@
+
+/* Uses same dark mode rules as .choices-box above */
+/* Container */
+.container {
+  margin-bottom: 3px;
+}
+/* Dark Mode - Container doesn't need special styling */
+
+/* Image */
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 200px;
+  max-width: min-content;
+  margin-top: 5px;
+}
+.card-dark-mode img {
+  filter: brightness(85%);
+}
+
+/* Circular Chart Container */
+.circular-chart-container {
+  width: 120px;
+  height: 120px;
+  padding-left: 70px;
+}
+/* No dark mode needed for circular chart container */
+
+/* Result Box */
+#result {
+  height: 50px;
+  background-color: #e3f2fd;
+  color: black;
+  border-radius: 5px;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  margin-top: -0.6rem;
+  width: 100%;
+}
+.card-dark-mode #result {
+  background-color: #597188 !important;
+  color: #fff !important;
+}
+
+/* SVG */
+svg {
+  margin-bottom: 20px;
+}
+/* No dark mode needed for svg */
+
+/* Choice Label */
+.mb-1 {
+  font-size: 15px;
+  padding: 5px;
+  color: white;
+}
+/* No specific dark mode override needed for .mb-1, depends on background */
+
+/* Choices Box */
+.choices-box {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 5px;
+  background-color: #e3f2fd;
+  border: 1px solid #ced4da;
+  justify-content: space-between;
+  align-items: center;
+}
+.card-dark-mode .choices-box {
+  background-color: #597188 !important;
+  border: 1px solid #555;
+}
+.card-dark-mode .choices-box .form-check-label {
+  color: #fff !important;
+}
+.card-dark-mode .choices-box .form-check-input {
+  background-color: #444 !important;
+  border-color: #777 !important;
+}
+
+/* True/False Box */
+.choices-box.true-false-container {
+  justify-content: space-around;
+}
+.choices-box.true-false-container .form-check {
+  display: flex;
+  align-items: center;
+}
+.choices-box.true-false-container .form-check-input {
+  margin-right: 0.5rem;
+}
+/* Uses same dark mode rules as .choices-box above */
+
+/* Open Questions (Textarea) */
+/* .form-control {
+
+} */
+.card-dark-mode .form-control {
+  background-color: #343a40 !important;
+  color: white !important;
+  border-color: #555 !important;
+}
+.card-dark-mode .form-control::placeholder {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Complete Questions (Input) */
+
+/* input.form-control {
+
+} */
+.card-dark-mode input.form-control {
+  background-color: #343a40 !important;
+  color: white !important;
+  border-color: #555 !important;
+}
+.card-dark-mode input.form-control::placeholder {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Open Questions (Textarea) */
+.card-dark-mode .form-control {
+  background-color: #343a40 !important;
+  color: white !important;
+  border-color: #555 !important;
+}
+.card-dark-mode .form-control::placeholder {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Complete Questions (Input) */
+/* input.form-control {
+  background-color: white;
+} */
+.card-dark-mode input.form-control {
+  background-color: #343a40 !important;
+  color: white !important;
+  border-color: #555 !important;
+}
+.card-dark-mode input.form-control::placeholder {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+.card-dark-mode .text-secondary {
+  color: white !important;
+}
+.card-dark-mode .text-success {
+  color: rgb(78, 222, 93) !important;
+}
+.card-dark-mode .text-danger {
+  color: rgb(222, 78, 78) !important;
+}
+.stroke-white {
+  stroke: #ffffff;
+}
+
+.stroke-gray {
+  stroke: #dddddd;
+}
+/* .card-dark-mode svg circle {
+  stroke: #ffffff !important;
+} */
+.card-dark-mode svg circle:nth-child(4) { /* Target the 4th circle (unanswered) */
+  stroke: #ffffff !important; /* Set the stroke color to white */
+}
+.card-dark-mode .unanswered-circle {
+  stroke: #ffffff !important;
+}

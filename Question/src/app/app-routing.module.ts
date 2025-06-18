@@ -16,26 +16,72 @@ import { AdminQuestionsComponent } from './admin-questions/admin-questions.compo
 // import { AdminFilesComponent } from './admin-files/admin-files.component';
 import { AdminDeletedQuestionComponent } from './admin-deleted-question/admin-deleted-question.component';
 import { AuthService } from './auth.service';
+import { RoleGuard } from './auth/role.guard';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'about', component: LandingComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'questions', component: QuestionsComponent  },
+  { path: 'about', component: LandingComponent },
+
+  // Public
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
-  { path: 'verify-otp', component: VerifyOtpComponent },
-  { path: 'reset-password', component: ResetPasswordComponent },
-  {path: 'admin/dashboard', component: AdminDashboardComponent },
-  { path: 'question-display', component: QuestionDisplayComponent },
-  { path: 'admin/subjects', component: AdminSubjectsComponent},
-  { path: 'admin/topics', component: AdminTopicsComponent },
-  { path: 'admin/questions', component: AdminQuestionsComponent },
-  // { path: 'admin/files', component: AdminFilesComponent },
-  { path: 'admin/deleted/question', component: AdminDeletedQuestionComponent },
-  { path: '', redirectTo: '/login', pathMatch: 'full' }
+
+  // Protected - student & admin
+  {
+    path: 'questions',
+    component: QuestionsComponent,
+    canActivate: [RoleGuard],
+    data: { roles: ['student', 'admin'] }
+  },
+  {
+    path: 'question-display',
+    component: QuestionDisplayComponent,
+    canActivate: [RoleGuard],
+    data: { roles: ['student', 'admin'] }
+  },
+  {
+    path: 'verify-otp',component: VerifyOtpComponent},
+  {
+    path: 'reset-password',component: ResetPasswordComponent},
+
+  // Admin-only routes
+  {
+    path: 'admin/dashboard',
+    component: AdminDashboardComponent,
+    canActivate: [RoleGuard],
+    data: { roles: ['admin'] }
+  },
+  {
+    path: 'admin/subjects',
+    component: AdminSubjectsComponent,
+    canActivate: [RoleGuard],
+    data: { roles: ['admin'] }
+  },
+  {
+    path: 'admin/topics',
+    component: AdminTopicsComponent,
+    canActivate: [RoleGuard],
+    data: { roles: ['admin'] }
+  },
+  {
+    path: 'admin/questions',
+    component: AdminQuestionsComponent,
+    canActivate: [RoleGuard],
+    data: { roles: ['admin'] }
+  },
+  {
+    path: 'admin/deleted/question',
+    component: AdminDeletedQuestionComponent,
+    canActivate: [RoleGuard],
+    data: { roles: ['admin'] }
+  },
+
+  // Fallback
+  { path: '**', redirectTo: '/home', pathMatch: 'full' }
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
